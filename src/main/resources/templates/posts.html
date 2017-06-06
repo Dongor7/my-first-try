@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+
+    <title>Posts</title>
+
+    <!--/*/ <th:block th:include="fragments/headerinc :: head"></th:block> /*/-->
+</head>
+<body>
+
+    <div class="container">
+        <!--/*/ <th:block th:include="fragments/header :: header"></th:block> /*/-->
+
+        <div th:if="${not #lists.isEmpty(posts)}">
+            <form th:action="@{/logout}" method="post">
+                <div class="col-sm-10"><h2>Posts Listing</h2></div>
+                <div class="col-sm-2" style="padding-top: 30px;">
+                    <span sec:authorize="isAuthenticated()">
+                        <input type="submit" value="Sign Out"/>
+                    </span>
+                </div>
+            </form>
+            <table class="table table-striped">
+                <tr>
+                    <th>Post Id</th>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Date Of Create</th>
+                    <th>Date Of Update</th>
+                    <th sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')">View</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">Edit</th>
+                    <th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
+                </tr>
+                <tr th:each="post : ${posts}">
+                    <td th:text="${post.id}"><a href="/post/${post.id}">Post Id</a></td>
+                    <td th:text="${post.title}">Title</td>
+                    <td th:text="${post.description}">Description</td>
+                    <td th:text="${post.createDate}">Date Of Create</td>
+                    <td th:text="${post.updateDate}">Date Of Update</td>
+                    <td sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')"><a th:href="${'/post/' + post.id}">View</a></td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="${'/post/edit/' + post.id}">Update</a></td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="${'/post/delete/' + post.id}">Delete</a></td>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

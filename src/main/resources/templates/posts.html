@@ -27,9 +27,9 @@
                     <th>Description</th>
                     <th>Date Of Create</th>
                     <th>Date Of Update</th>
-                    <th sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')">View</th>
-                    <th sec:authorize="hasRole('ROLE_ADMIN')">Edit</th>
-                    <th sec:authorize="hasRole('ROLE_ADMIN')">Delete</th>
+                    <th sec:authorize="hasAnyAuthority('USER','ADMIN')">View</th>
+                    <th sec:authorize="hasAuthority('ADMIN')">Edit</th>
+                    <th sec:authorize="hasAuthority('ADMIN')">Delete</th>
                 </tr>
                 <tr th:each="post : ${posts}">
                     <td th:text="${post.id}"><a href="/post/${post.id}">Post Id</a></td>
@@ -37,9 +37,9 @@
                     <td th:text="${post.description}">Description</td>
                     <td th:text="${post.createDate}">Date Of Create</td>
                     <td th:text="${post.updateDate}">Date Of Update</td>
-                    <td sec:authorize="hasAnyRole('ROLE_USER','ROLE_ADMIN')"><a th:href="${'/post/' + post.id}">View</a></td>
-                    <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="${'/post/edit/' + post.id}">Update</a></td>
-                    <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="${'/post/delete/' + post.id}">Delete</a></td>
+                    <td sec:authorize="hasAnyAuthority('USER','ADMIN')"><a th:href="${'/post/' + post.id}">View</a></td>
+                    <td sec:authorize="hasAuthority('ADMIN')"><a th:href="${'/post/edit/' + post.id}">Update</a></td>
+                    <td sec:authorize="hasAuthority('ADMIN')"><a th:href="${'/post/delete/' + post.id}">Delete</a></td>
                 </tr>
             </table>
         </div>

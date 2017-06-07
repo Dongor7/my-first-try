@@ -34,7 +34,7 @@ dependencies {
     compile('org.webjars:bootstrap:3.3.7')
     compile('org.webjars:jquery:2.1.4')
     compile('junit:junit:4.12')
-	runtime('mysql:mysql-connector-java')
-	compileOnly('org.projectlombok:lombok')
+    compile('org.jasypt:jasypt:1.9.2')
+    compile('org.jasypt:jasypt-springsecurity3:1.9.2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
